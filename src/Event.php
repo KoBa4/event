@@ -19,6 +19,11 @@ class Event implements EventInterface
     private $name;
 
     /**
+     * @var null|string|object
+     */
+    private $target;
+
+    /**
      * Event constructor.
      *
      * @param string $name
@@ -45,7 +50,7 @@ class Event implements EventInterface
      */
     public function getTarget()
     {
-        // TODO: Implement getTarget() method.
+        return $this->target;
     }
 
     /**
@@ -76,7 +81,9 @@ class Event implements EventInterface
      */
     public function setTarget($target)
     {
-        // TODO: Implement setTarget() method.
+        if ( !is_string($target) && !is_object($target) && !is_null($target) )
+            throw new \InvalidArgumentException("Target must be string or null or object");
+        $this->target = $target;
     }
 
     /**

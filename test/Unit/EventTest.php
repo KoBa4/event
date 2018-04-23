@@ -23,7 +23,7 @@ class EventTest extends \PHPUnit_Framework_TestCase
         $this->event = new Event('test');
     }
 
-    public function testSetName()
+    public function testGetName()
     {
         $this->assertSame('test', $this->event->getName());
     }
@@ -32,16 +32,6 @@ class EventTest extends \PHPUnit_Framework_TestCase
     {
         $this->event->setName('aloha');
         $this->assertSame('aloha', $this->event->getName());
-    }
-
-    /**
-     * @dataProvider providerInvalidNames
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Name must be string
-     */
-    public function testSetNameInvalid($name)
-    {
-        $this->event->setName($name);
     }
 
     public function providerInvalidNames()
@@ -54,8 +44,42 @@ class EventTest extends \PHPUnit_Framework_TestCase
         );
     }
     
-    public function testFail()
+    /**
+     * @dataProvider providerInvalidNames
+     * @expectedException \InvalidArgumentException
+     * @expectedExceptionMessage Name must be string
+     */
+    public function testSetNameInvalid($name)
     {
-        $this->assertFalse(false);
+        $this->event->setName($name);
+    }
+
+    public function testGetTarget()
+    {
+        $this->assertSame(null, $this->event->getTarget());
+    }
+
+    public function testSetTarget()
+    {
+        $this->event->setTarget('string');
+        $this->assertSame('string', $this->event->getTarget());
+    }
+
+    public function providerInvalidTargets()
+    {
+        return array(
+            array(array()),
+            array(123)
+        );
+    }
+
+    /**
+     * @dataProvider providerInvalidTargets
+     * @expectedException \InvalidArgumentException
+     * @expectedExceptionMessage Target must be string or null or object
+     */
+    public function testSetTargetInvalid($target)
+    {
+        $this->event->setTarget($target);
     }
 }
