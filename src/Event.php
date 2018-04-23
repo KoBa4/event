@@ -24,6 +24,11 @@ class Event implements EventInterface
     private $target;
 
     /**
+     * @var array
+     */
+    private $params;
+
+    /**
      * Event constructor.
      *
      * @param string $name
@@ -58,7 +63,7 @@ class Event implements EventInterface
      */
     public function getParams()
     {
-        // TODO: Implement getParams() method.
+        return $this->params;
     }
 
     /**
@@ -66,7 +71,12 @@ class Event implements EventInterface
      */
     public function getParam($name)
     {
-        // TODO: Implement getParam() method.
+        $result = null;
+        if ( array_key_exists($name, $this->getParams()) ) {
+            $result = $this->params[$name];
+        }
+
+        return $result;
     }
 
     public function setName($name)
@@ -91,7 +101,12 @@ class Event implements EventInterface
      */
     public function setParams(array $params)
     {
-        // TODO: Implement setParams() method.
+        foreach ( $params as $key => $value ) {
+            if ( !is_string($key) ) {
+                throw new \InvalidArgumentException('Params key must be string');
+            }
+        }
+        $this->params = $params;
     }
 
     /**

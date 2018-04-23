@@ -82,4 +82,53 @@ class EventTest extends \PHPUnit_Framework_TestCase
     {
         $this->event->setTarget($target);
     }
+
+    public function testGetParams()
+    {
+        $this->assertSame(array(), $this->event->getParams());
+    }
+
+    public function testSetParams()
+    {
+        $this->event->setParams(array('string' => 123));
+        $this->assertSame(array('string' => 123), $this->event->getParams());
+    }
+
+    public function providerInvalidParams()
+    {
+        return array(
+            array('string'),
+            array(123),
+            array(null),
+        );
+    }
+
+    /**
+     * @dataProvider providerInvalidParams
+     * @expectedException \TypeError
+     */
+    public function testSetParamsInvalid($params)
+    {
+        $this->event->setParams($params);
+    }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     * @expectedExceptionMessage Params key must be string
+     */
+    public function testSetParamsInvalidArrayKey()
+    {
+        $this->event->setParams(array(0 => 123));
+    }
+
+    public function testGetParam()
+    {
+        $this->assertSame(null, $this->event->getParam('string'));
+    }
+
+    public function testGetParamNotNull()
+    {
+        $this->event->setParams(array('string' => 'value'));
+        $this->assertSame('value', $this->event->getParam('string'));
+    }
 }
