@@ -1,0 +1,32 @@
+{
+  "name": "koba4/event",
+  "license": "GPL-3.0",
+  "authors": [
+    {
+      "name": "KoBa4",
+      "email": "cova44ever@gmail.com"
+    }
+  ],
+  "require": {
+    "koba4/psr-event": "@dev"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "@stable"
+  },
+  "autoload": {
+    "psr-4": {
+      "KoBa4\\Event\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "KoBa4\\Event\\Test\\": "test/"
+    }
+  },
+  "provide": {
+    "koba4/psr-event-implementation": "@dev"
+  },
+  "scripts": {
+    "test": "vendor/bin/phpunit"
+  }
+}
