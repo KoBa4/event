@@ -11,7 +11,7 @@
     "koba4/psr-event": "@dev"
   },
   "require-dev": {
-    "phpunit/phpunit": "@stable"
+    "phpunit/phpunit": "5.*"
   },
   "autoload": {
     "psr-4": {

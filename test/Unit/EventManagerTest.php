@@ -8,9 +8,7 @@
 
 namespace KoBa4\Event\Test\Unit;
 
-use PHPUnit\Framework\TestCase;
-
-class EventManagerTest extends TestCase
+class EventManagerTest extends \PHPUnit_Framework_TestCase
 {
     public function testHappy()
     {

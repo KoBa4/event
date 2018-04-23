@@ -8,9 +8,7 @@
 
 namespace KoBa4\Event\Test\Unit;
 
-use PHPUnit\Framework\TestCase;
-
-class EventTest extends TestCase
+class EventTest extends \PHPUnit_Framework_TestCase
 {
     public function testFail()
     {
