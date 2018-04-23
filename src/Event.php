@@ -13,13 +13,31 @@ use KoBa4\PEvent\EventInterface;
 
 class Event implements EventInterface
 {
+    /**
+     * @var string
+     */
+    private $name;
 
+    /**
+     * Event constructor.
+     *
+     * @param string $name
+     * @param null|string|object $target
+     * @param array $params
+     */
+    public function __construct($name, $target = null, array $params = array())
+    {
+        $this->setName($name);
+        $this->setTarget($target);
+        $this->setParams($params);
+    }
+    
     /**
      * @inheritdoc
      */
     public function getName()
     {
-        // TODO: Implement getName() method.
+        return $this->name;
     }
 
     /**
@@ -48,7 +66,9 @@ class Event implements EventInterface
 
     public function setName($name)
     {
-        // TODO: Implement setName() method.
+        if ( !is_string($name) )
+            throw new \InvalidArgumentException("Name must be string");
+        $this->name = $name;
     }
 
     /**
