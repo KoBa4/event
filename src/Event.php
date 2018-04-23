@@ -17,16 +17,18 @@ class Event implements EventInterface
      * @var string
      */
     private $name;
-
     /**
      * @var null|string|object
      */
     private $target;
-
     /**
      * @var array
      */
     private $params;
+    /**
+     * @var bool
+     */
+    private $flag = false;
 
     /**
      * Event constructor.
@@ -114,7 +116,10 @@ class Event implements EventInterface
      */
     public function stopPropagation($flag)
     {
-        // TODO: Implement stopPropagation() method.
+        if ( !is_bool($flag) ) {
+            throw new \InvalidArgumentException('Flag must be bool');
+        }
+        $this->flag = $flag;
     }
 
     /**
@@ -122,6 +127,6 @@ class Event implements EventInterface
      */
     public function isPropagationStopped()
     {
-        // TODO: Implement isPropagationStopped() method.
+        return $this->flag;
     }
 }

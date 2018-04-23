@@ -113,4 +113,32 @@ class EventTest extends \PHPUnit_Framework_TestCase
         $this->event->setParams(array('string' => 'value'));
         $this->assertSame('value', $this->event->getParam('string'));
     }
+
+    public function testStopPropagation()
+    {
+        $this->assertFalse($this->event->isPropagationStopped());
+        $this->event->stopPropagation(true);
+        $this->assertTrue($this->event->isPropagationStopped());
+    }
+
+    public function providerPropagationInvalid()
+    {
+        return array(
+            array(array()),
+            array(123),
+            array('string'),
+            array(new \stdClass())
+        );
+    }
+
+    /**
+     * @param $value
+     * @dataProvider providerPropagationInvalid
+     * @expectedException \InvalidArgumentException
+     * @expectedExceptionMessage Flag must be bool
+     */
+    public function testStopPropagationNotBool($value)
+    {
+        $this->event->stopPropagation($value);
+    }
 }
